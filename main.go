@@ -135,6 +135,20 @@ func AttributeToString(attrName string, attrRawVal interface{}) string {
 	return s
 }
 
+// Given a ResourceState, overwrite the specified list attribute with the specified values.
+func OverwriteList(state *terraform.ResourceState, attrName string, values interface{}) {
+	newAttrs := flatmap.Flatten(map[string]interface{}{
+		attrName: values,
+	})
+
+	attrs := flatmap.Map(state.Primary.Attributes)
+	attrs.Delete(attrName)
+	attrs.Merge(newAttrs)
+
+	state.Primary.Attributes = attrs
+}
+
+
 func ResourceAsString(state *terraform.ResourceState) string {
 	attrs := state.Primary.Attributes
 	s := fmt.Sprintf("resource \"%s\" \"%s\" {\n", state.Type, state.Primary.ID)
