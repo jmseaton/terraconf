@@ -56,7 +56,7 @@ func PrimitiveValueToString(rawValue interface{}) string {
 		// TODO: is it valid to always quote hcl strings?
 		return strconv.Quote(v)
 	case bool:
-		return fmt.Sprintf("%t", v)
+		return fmt.Sprintf("\"%t\"", v)
 	case int:
 		return fmt.Sprintf("%d", v)
 	case int32:
