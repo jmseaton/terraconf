@@ -1,0 +1,4 @@
+language: go
+go:
+  - "1.9"
+go_import_path: github.com/jzbruno/terraconf/pkg/terraconf
