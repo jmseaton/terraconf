@@ -2,9 +2,10 @@ package terraconf
 
 import (
 	"fmt"
-	"github.com/hashicorp/terraform/terraform"
 	"strconv"
 	"testing"
+
+	"github.com/hashicorp/terraform/terraform"
 )
 
 // Test sanitizeResourceID
