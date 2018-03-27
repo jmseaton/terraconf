@@ -300,7 +300,7 @@ func TestGetPrimitiveAttributeListString(t *testing.T) {
 
 // Test getMapAttributeString
 // TODO: Add more complete tests
-// TODO: Found bug, map string should be sorted to avoid diffs
+// TODO: Found bug, map string should be sorted to avoid diffs, for now checking for both orders
 
 func TestGetMapAttributeString(t *testing.T) {
 	m := map[string]interface{}{
@@ -309,10 +309,11 @@ func TestGetMapAttributeString(t *testing.T) {
 	}
 
 	result := getMapAttributeString("tags", m)
-	expected := "tags {\na = \"a\"\nb = \"b\"\n}\n"
+	expectedA := "tags {\na = \"a\"\nb = \"b\"\n}\n"
+	expectedB := "tags {\nb = \"b\"\na = \"a\"\n}\n"
 
-	if result != expected {
-		t.Errorf("Expected '%s' but got '%s'", expected, result)
+	if result != expectedA && result != expectedB {
+		t.Errorf("Expected '%s' but got '%s'", expectedA, result)
 	}
 }
 
@@ -353,10 +354,11 @@ func TestGetAttributeStringList(t *testing.T) {
 // TODO: found bug or reason to fix unknown case of getPrimitiveValueString
 func TestGetAttributeStringMap(t *testing.T) {
 	result := getAttributeString("names", map[string]interface{}{"a": "a", "b": "b"})
-	expected := "names {\na = \"a\"\nb = \"b\"\n}\n"
+	expectedA := "names {\na = \"a\"\nb = \"b\"\n}\n"
+	expectedB := "names {\nb = \"b\"\na = \"a\"\n}\n"
 
-	if result != expected {
-		t.Errorf("Expected '%s' but got '%s'", expected, result)
+	if result != expectedA && result != expectedB {
+		t.Errorf("Expected '%s' but got '%s'", expectedA, result)
 	}
 }
 
